@@ -1,0 +1,20 @@
+import axios from 'axios';
+
+class Temperature {
+	lat = 0;
+	lon = 0;
+
+	constructor({ lat = 0, lon = 0 } = {}) {
+		this.lat = lat;
+		this.lon = lon;
+	}
+
+	async get() {
+		const req = await axios.get(
+			`https://api.openweathermap.org/data/2.5/onecall?lat=${this.lat}&lon=${this.lon}&exclude=minutely,hourly,daily,alerts&units=metric&appid=${process.env.OPEN_WEATHER_API_KEY}`,
+		);
+		return req.data;
+	}
+}
+
+export { Temperature };
