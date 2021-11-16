@@ -26,6 +26,7 @@
         "core-js": "^3.19.1",
         "dotenv": "^10.0.0",
         "fastify": "^3.24.0",
+        "lodash": "^4.17.21",
         "qs": "^6.10.1",
         "regenerator-runtime": "^0.13.9",
         "rimraf": "^3.0.2"

@@ -1,3 +1,4 @@
+// --- Used because @babel/polyfill was deprecated on v7.4 ---
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 

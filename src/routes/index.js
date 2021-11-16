@@ -1,5 +1,6 @@
 import app from '../app';
 
-import TemperatureOptionsRoute from '../apiServices/Temperature/routes';
+import TemperatureRoutes from '../apiServices/Temperature/routes';
 
-app.route(TemperatureOptionsRoute);
+app.route(TemperatureRoutes.DefaultRoute);
+app.route(TemperatureRoutes.CustomRoute);

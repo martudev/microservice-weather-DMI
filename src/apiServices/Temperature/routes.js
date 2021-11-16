@@ -1,9 +1,23 @@
-module.exports = {
-	// docs: https://www.fastify.io/docs/latest/Routes/
-	method: 'GET',
-	url: '/test',
+// docs: https://www.fastify.io/docs/latest/Routes/
 
-	handler: function (request, reply) {
-		reply.send({ hello: 'world' });
-	},
+import { DefaultHandler, CustomHandler } from './controller';
+
+const DefaultRoute = {
+	method: 'GET',
+	url: '/temperature',
+	handler: DefaultHandler,
 };
+
+const CustomRoute = {
+	method: 'GET',
+	url: '/temperature/custom',
+	schema: {
+		querystring: {
+			lat: { type: 'integer' },
+			lon: { type: 'integer' },
+		},
+	},
+	handler: CustomHandler,
+};
+
+module.exports = { DefaultRoute, CustomRoute };
