@@ -4,29 +4,37 @@ import 'regenerator-runtime/runtime';
 
 require('dotenv').config();
 
-import { Server } from './server';
-import { Temperature } from './Temperature';
+import { Temperature } from './apiServices/Temperature';
+import Fastify from 'fastify';
+import qs from 'qs';
 
-const server = new Server();
-
-server.fastify.get('/', async () => {
-	const temperature = new Temperature({ lat: -36.2449366, lon: -57.8939405 });
-	const {
-		timezone,
-		lat,
-		lon,
-		current: { temp },
-	} = await temperature.get();
-	return {
-		timezone: timezone,
-		lat: lat,
-		lon: lon,
-		temp: temp,
-		more_than_15dg: temp > 15,
-	};
+const app = Fastify({
+	logger: true,
+	querystringParser: (str) => qs.parse(str),
 });
 
-server.fastify.get('/custom', async (request) => {
+app.get('/', async () => {
+	try {
+		const {
+			timezone,
+			lat,
+			lon,
+			current: { temp },
+		} = await Temperature.get({ lat: -36.2449366, lon: -57.8939405 });
+		return {
+			timezone: timezone,
+			lat: lat,
+			lon: lon,
+			temp: temp,
+			more_than_15dg: temp > 15,
+		};
+	} catch (e) {
+		console.log(e.response.data);
+		return e.response.data;
+	}
+});
+
+app.get('/custom', async (request) => {
 	if (Object.keys(request.query).length === 0)
 		throw new Error('No query params. ej: lat, lon');
 	const temperature = new Temperature({
@@ -53,4 +61,4 @@ server.fastify.get('/custom', async (request) => {
 	}
 });
 
-server.start();
+export default app;
