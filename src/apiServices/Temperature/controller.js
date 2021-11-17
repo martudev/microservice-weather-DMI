@@ -1,5 +1,6 @@
 import { Temperature } from '.';
 import lodash from 'lodash';
+import APIKeyError from '../../exceptions/APIKeyError';
 
 const DefaultHandler = async (request, reply) => {
 	try {
@@ -17,8 +18,16 @@ const DefaultHandler = async (request, reply) => {
 			more_than_15dg: temp > 15,
 		};
 	} catch (e) {
-		console.log(e.response.data);
-		reply.code(e.response.status).send(e.response.data);
+		if (e instanceof APIKeyError) {
+			console.log(e);
+			reply.code(500).send({
+				code: 500,
+				message: 'An error occurred with an invalid api key',
+			});
+		} else {
+			console.log(e.response.data);
+			reply.code(e.response.status).send(e.response.data);
+		}
 	}
 };
 
@@ -46,8 +55,16 @@ const CustomHandler = async (request, reply) => {
 			more_than_15dg: temp > 15,
 		};
 	} catch (e) {
-		console.log(e.response.data);
-		reply.code(e.response.status).send(e.response.data);
+		if (e instanceof APIKeyError) {
+			console.log(e);
+			reply.code(500).send({
+				code: 500,
+				message: 'An error occurred with an invalid api key',
+			});
+		} else {
+			console.log(e.response.data);
+			reply.code(e.response.status).send(e.response.data);
+		}
 	}
 };
 

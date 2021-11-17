@@ -1,6 +1,8 @@
-import app from '../app';
-
 import TemperatureRoutes from '../apiServices/Temperature/routes';
 
-app.route(TemperatureRoutes.DefaultRoute);
-app.route(TemperatureRoutes.CustomRoute);
+const register = (app) => {
+	app.route(TemperatureRoutes.DefaultRoute);
+	app.route(TemperatureRoutes.CustomRoute);
+};
+
+export { register };

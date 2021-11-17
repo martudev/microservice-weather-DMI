@@ -6,12 +6,13 @@
     "scripts": {
         "clean": "rimraf dist",
         "build": "npm run clean && babel src -d dist",
-        "lint": "eslint \"src/**/*.js\" --ignore-pattern node_modules/",
-        "lint:fix": "eslint \"**/*.js\" --ignore-pattern node_modules/ --fix",
+        "lint": "eslint \"src/**/*.js\"",
+        "lint:fix": "eslint \"**/*.js\" --fix",
         "start": "npm run lint && npm run build && node dist/server.js",
         "prepare": "husky install",
         "commit": "npx cz",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "jest --verbose",
+        "test:coverage": "jest --verbose --coverage"
     },
     "keywords": [
         "microservice",
@@ -38,12 +39,16 @@
         "@babel/preset-env": "^7.16.0",
         "@commitlint/cli": "^14.1.0",
         "@commitlint/config-conventional": "^14.1.0",
+        "@types/jest": "^27.0.2",
+        "babel-jest": "^27.3.1",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^8.2.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",
         "husky": "^7.0.4",
-        "prettier": "2.4.1"
+        "jest": "^27.3.1",
+        "prettier": "2.4.1",
+        "supertest": "^6.1.6"
     },
     "config": {
         "commitizen": {
