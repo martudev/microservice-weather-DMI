@@ -35,3 +35,13 @@ Y si queremos correrlos con coverage
 ```
 npm run test:coverage
 ```
+
+## EndPoints
+
+### http://localhost:3000/temperature
+
+Obtiene un `json` que verifica que la temperatura sea mayor o menor a 15°C en la localidad de Rio Cuarto, Argentina.
+
+### http://localhost:3000/temperature/custom
+
+Obtiene un `json` que verifica que la temperatura sea mayor o menor a 15°C en cualquier parte del mundo. Le debes pasar dos parametros en la url, **lat**(latitude) y **lon**(longitude). Ej: `http://localhost:3000/temperature/custom?lat=-34.6158037&lon=-58.5033381` (Buenos aires, Argentina)
